@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -6,12 +7,6 @@
 	<artifactId>pdfextractor</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
-	<parent>
-		<groupId>com.dbenergie.platform.dev</groupId>
-		<artifactId>dev-nb-base-pom</artifactId>
-		<version>1.1.2</version>
-	</parent>
 
 	<contributors>
 		<contributor>
@@ -51,11 +46,17 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.6.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<!-- Für PDF Import -->
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 			<version>2.0.15</version>
+		</dependency>
+		<!-- Für Excel Export -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
 		</dependency>
 	</dependencies>
 
@@ -74,7 +75,9 @@
 						<configuration>
 							<filters>
 								<filter>
-									<!-- Deaktiviert das includen der Zertifikate aus zertifizierten Libs. (Führt zu Problemen, weil die JVM denkt die Zertifikate gehören dem aktuellen jar.) -->
+									<!-- Deaktiviert das includen der Zertifikate aus zertifizierten 
+										Libs. (Führt zu Problemen, weil die JVM denkt die Zertifikate gehören dem 
+										aktuellen jar.) -->
 									<artifact>*:*</artifact>
 									<excludes>
 										<exclude>META-INF/*.SF</exclude>
@@ -85,7 +88,8 @@
 							</filters>
 							<createDependencyReducedPom>false</createDependencyReducedPom>
 							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>de.woody64k.tools.pdf.App</mainClass>
 								</transformer>
 							</transformers>
