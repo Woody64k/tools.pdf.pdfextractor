@@ -90,7 +90,7 @@
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>de.woody64k.tools.pdf.App</mainClass>
+									<mainClass>de.woody64k.tools.pdf.pdfextractor.App</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>

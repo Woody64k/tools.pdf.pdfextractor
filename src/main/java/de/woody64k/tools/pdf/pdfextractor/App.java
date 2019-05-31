@@ -21,19 +21,25 @@ public class App {
 	private static Logger LOG = LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
-		String workingDirPath = (args.length == 0) ? "C:\\temp\\pdf\\" : args[0] + '\\';
-		final File workingDir = new File(workingDirPath);
-		List<File> pdfFileList = Arrays.asList(workingDir.listFiles(a -> a.getName().endsWith(".pdf")));
-		LOG.info("Print Load Document");
+		try {
+			String workingDirPath = (args.length == 0) ? "C:\\temp\\pdf\\" : args[0] + '\\';
+			final File workingDir = new File(workingDirPath);
+			List<File> pdfFileList = Arrays.asList(workingDir.listFiles(a -> a.getName().endsWith(".pdf")));
+			LOG.info("Print Load Document");
 
-		ExcelDataFile excelFile = new ExcelDataFile();
-		pdfFileList.forEach(pdfFile -> {
-			Map<String, String> propertyMap = getFieldsFromPdfForm(pdfFile);
-			excelFile.addEntity(propertyMap);
-		});
-		File outfile = new File(workingDirPath + "output.xlsx");
-		outfile.createNewFile();
-		excelFile.saveExcel(outfile);
+			ExcelDataFile excelFile = new ExcelDataFile();
+			pdfFileList.forEach(pdfFile -> {
+				Map<String, String> propertyMap = getFieldsFromPdfForm(pdfFile);
+				excelFile.addEntity(propertyMap);
+			});
+			File outfile = new File(workingDirPath + "output.xlsx");
+			outfile.createNewFile();
+			excelFile.saveExcel(outfile);
+		} catch (Throwable e) {
+			LOG.error("Ein Fehler ist Aufgetreten", e);
+			System.exit(1);// Fehler
+		}
+		System.exit(0);// kein Fehler
 	}
 
 	private static Map<String, String> getFieldsFromPdfForm(File pdfFile) {
