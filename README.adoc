@@ -1,0 +1,16 @@
+= PDF Extractor
+
+== Verwendung
+Der PDF-Ectractor wird wie folgt ausgeführt:
+
+[source,shell]
+----
+java -jar pdfextractor.jar
+----
+
+Er analysiert alle PDF-Formulare im Ordner C:\temp\pdf. Der Analyseordner kann aber auch als Parameter übergeben werden.
+
+[source,shell]
+----
+java -jar pdfextractor.jar E:\Umfragem\pdf
+----
